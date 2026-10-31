@@ -62,7 +62,10 @@ def buscar_cidades(nome: str) -> list[dict]:
 def descrever_cidade(cidade: dict) -> str:
     """Monta o texto 'Cidade - Estado, País' ignorando partes que faltarem."""
     detalhes = ", ".join(p for p in (cidade["estado"], cidade["pais"]) if p)
-    return f"{cidade['nome']} - {detalhes}" if detalhes else cidade["nome"]
+    if detalhes:
+        return f"{cidade['nome']} - {detalhes}"  
+    else:
+        return cidade["nome"]
 
 
 def buscar_clima(latitude: float, longitude: float) -> dict:

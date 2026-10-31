@@ -146,7 +146,10 @@ def escolher_cidade(cidades: list[dict]) -> dict | None:
         print(f"{i}. {descrever_cidade(cidade)}")
 
     numero = ler_inteiro("Qual delas? (0 para cancelar): ", 0, len(cidades))
-    return cidades[numero - 1] if numero else None
+    if numero:
+        return cidades[numero - 1] 
+    else:
+        return None
 
 
 def opcao_sugerir_clima(slots: dict[int, dict[str, int]]) -> None:

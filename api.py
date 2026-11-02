@@ -35,10 +35,6 @@ def _traduzir_erros():
 
 
 def buscar_cidades(nome: str) -> list[dict]:
-    """
-    Usa a API de geocoding e devolve até MAX_RESULTADOS cidades com esse nome.
-    Cada item tem: nome, estado, pais, latitude e longitude. Lista vazia = não encontrou.
-    """
     with _traduzir_erros():
         resposta = requests.get(
             URL_GEOCODING,
@@ -60,7 +56,6 @@ def buscar_cidades(nome: str) -> list[dict]:
 
 
 def descrever_cidade(cidade: dict) -> str:
-    """Monta o texto 'Cidade - Estado, País' ignorando partes que faltarem."""
     detalhes = ", ".join(p for p in (cidade["estado"], cidade["pais"]) if p)
     if detalhes:
         return f"{cidade['nome']} - {detalhes}"  
@@ -69,7 +64,6 @@ def descrever_cidade(cidade: dict) -> str:
 
 
 def buscar_clima(latitude: float, longitude: float) -> dict:
-    """Busca o clima atual (nuvens, dia/noite e precipitação) para as coordenadas."""
     with _traduzir_erros():
         resposta = requests.get(
             URL_CLIMA,
@@ -85,7 +79,6 @@ def buscar_clima(latitude: float, longitude: float) -> dict:
 
 
 def montar_sugestao(clima: dict) -> tuple[str, dict[str, int]]:
-    """Converte o clima em uma descrição e em um modo de câmera sugerido."""
     sugestao = modo_padrao()
     nuvens = clima["cloud_cover"]
 
@@ -109,10 +102,6 @@ def montar_sugestao(clima: dict) -> tuple[str, dict[str, int]]:
 
 
 def sugerir_modo_para_local(latitude: float, longitude: float) -> tuple[str, dict[str, int]]:
-    """
-    Busca o clima nas coordenadas e devolve (descrição_do_clima, modo_sugerido).
-    Levanta ErroClima se houver problema de rede ou resposta inesperada.
-    """
     clima = buscar_clima(latitude, longitude)
     with _traduzir_erros():
         return montar_sugestao(clima)

@@ -28,10 +28,6 @@ from interface import (
 
 
 def editar_valores(modo_original: dict[str, int]) -> dict[str, int] | None:
-    """
-    Loop de edição sobre uma CÓPIA do modo.
-    Retorna o modo editado se o usuário confirmar, ou None se cancelar/não alterar.
-    """
     modo = modo_original.copy()
     print("\nConfigurações atuais:")
     exibir_modo(modo)
@@ -69,7 +65,6 @@ def editar_valores(modo_original: dict[str, int]) -> dict[str, int] | None:
 
 
 def opcao_criar(slots: dict[int, dict[str, int]]) -> None:
-    """Opção 1: criar um modo em um slot livre."""
     livres = slots_com_estado(slots, personalizado=False)
     if not livres:
         print("Todos os slots já estão em uso. Use Editar ou Excluir.")
@@ -88,7 +83,6 @@ def opcao_criar(slots: dict[int, dict[str, int]]) -> None:
 
 
 def opcao_editar(slots: dict[int, dict[str, int]]) -> None:
-    """Opção 2: editar um slot que já tem modo salvo."""
     usados = slots_com_estado(slots, personalizado=True)
     if not usados:
         print("Nenhum modo salvo para editar.")
@@ -107,7 +101,6 @@ def opcao_editar(slots: dict[int, dict[str, int]]) -> None:
 
 
 def opcao_excluir(slots: dict[int, dict[str, int]]) -> None:
-    """Opção 3: resetar um slot para o padrão."""
     usados = slots_com_estado(slots, personalizado=True)
     if not usados:
         print("Nenhum modo salvo para excluir.")
@@ -125,7 +118,6 @@ def opcao_excluir(slots: dict[int, dict[str, int]]) -> None:
 
 
 def opcao_listar(slots: dict[int, dict[str, int]]) -> None:
-    """Opção 4: mostrar os modos salvos."""
     usados = slots_com_estado(slots, personalizado=True)
     if not usados:
         print("Nenhum modo salvo ainda.")
@@ -137,7 +129,6 @@ def opcao_listar(slots: dict[int, dict[str, int]]) -> None:
 
 
 def escolher_cidade(cidades: list[dict]) -> dict | None:
-    """Mostra as cidades encontradas e deixa o usuário escolher (0 cancela)."""
     if len(cidades) == 1:
         return cidades[0]
 
@@ -153,7 +144,6 @@ def escolher_cidade(cidades: list[dict]) -> dict | None:
 
 
 def opcao_sugerir_clima(slots: dict[int, dict[str, int]]) -> None:
-    """Opção 5: consulta o clima via API e sugere um modo de câmera."""
     nome = input("Digite a cidade (ENTER para cancelar): ").strip()
     if not nome:
         return

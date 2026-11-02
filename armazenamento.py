@@ -42,12 +42,10 @@ CONFIGURACOES = {
 
 
 def modo_padrao() -> dict[str, int]:
-    """Retorna um modo novo com todos os valores padrão."""
     return {nome: cfg["padrao"] for nome, cfg in CONFIGURACOES.items()}
 
 
 def modo_valido(modo: object) -> bool:
-    """Confere se um modo lido do JSON tem todas as chaves e valores dentro da faixa."""
     if not isinstance(modo, dict) or set(modo) != set(CONFIGURACOES):
         return False
     return all(
@@ -58,19 +56,16 @@ def modo_valido(modo: object) -> bool:
 
 
 def slot_personalizado(slots: dict[int, dict[str, int]], numero: int) -> bool:
-    """True se o slot foi modificado (é diferente do padrão)."""
     return slots[numero] != modo_padrao()
 
 
 def slots_com_estado(slots: dict[int, dict[str, int]], personalizado: bool) -> list[int]:
-    """Lista os números de slots personalizados (True) ou livres (False)."""
     return [n for n in slots if slot_personalizado(slots, n) == personalizado]
 
 
 
 
 def carregar_slots() -> dict[int, dict[str, int]]:
-    """Lê os slots do arquivo JSON. Se não existir ou estiver corrompido, usa o padrão."""
     slots = {n: modo_padrao() for n in range(1, TOTAL_SLOTS + 1)}
 
     try:
@@ -90,7 +85,6 @@ def carregar_slots() -> dict[int, dict[str, int]]:
 
 
 def salvar_slots(slots: dict[int, dict[str, int]]) -> bool:
-    """Grava os slots no arquivo JSON. Retorna True se deu certo."""
     try:
         with open(ARQUIVO_JSON, "w", encoding="utf-8") as arquivo:
             json.dump({str(n): m for n, m in slots.items()},

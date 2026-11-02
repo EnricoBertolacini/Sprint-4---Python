@@ -1,8 +1,3 @@
-"""
-armazenamento.py
-Configurações da câmera, modelo de dados dos slots e persistência em JSON.
-Este módulo não depende de nenhum outro arquivo do projeto.
-"""
 
 import json
 from pathlib import Path

@@ -1,13 +1,13 @@
 {
     "1": {
-        "Brilho": 20,
+        "Brilho": 65,
         "Saturação": 50,
-        "Temperatura de Cor": 50,
-        "Contraste": 50,
-        "Exposição": 50,
+        "Temperatura de Cor": 40,
+        "Contraste": 55,
+        "Exposição": 60,
         "Sombra": 50,
         "Nitidez": 50,
-        "Flash": 0,
+        "Flash": 2,
         "Formato de Arquivo": 1,
         "Proporção": 1,
         "Modo Documento": 0,
